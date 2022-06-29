@@ -5,4 +5,4 @@ Tema do mercadin pra P2 de LP
 - Entender como compilar multiplos arquivos
 - funcoes de leitura/escrita de arquivos
 - OQ E MAKEFILE
-- juntar headers em um header principal
+- ~juntar headers em um header principal~

@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include "menu_vendas.h"
-#include "menu_clientes.h"
-#include "menu_produtos.h"
+#include "menu_header.h"
 
 
-int main() 
+int main()
 {
   bool SAIR = false;
-  
+
   //Recursão do menu principal até que o usuario escolha a opção de saida.
   while(SAIR==false)
   {
