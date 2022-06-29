@@ -1,6 +1,16 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include "menu_vendas.h"
 
+void clientes()
+{
+  printf("coe cliente\n");
+}
+
+void produtos()
+{
+  printf("coe produto\n");
+}
 
 int main() 
 {
@@ -17,6 +27,18 @@ int main()
 
     switch(opcao)
     {
+      //acessa o menu de vendas
+      case 1 : vendas();
+      break;
+
+      //acessa o menu de cliente
+      case 2 : clientes();
+      break;
+
+      //acessa o menu de produtos
+      case 3 : produtos();
+      break;
+
       //fim do programa
       case 9 : printf("Fim do programa\n");
       SAIR = true;
