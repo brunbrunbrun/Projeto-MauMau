@@ -3,5 +3,5 @@
 
 void vendas()
 {
-    printf("coe venda\n");
+    printf("coe venda_pirulito\n");
 }

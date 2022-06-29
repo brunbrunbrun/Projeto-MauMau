@@ -1,16 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "menu_vendas.h"
+#include "menu_clientes.h"
+#include "menu_produtos.h"
 
-void clientes()
-{
-  printf("coe cliente\n");
-}
-
-void produtos()
-{
-  printf("coe produto\n");
-}
 
 int main() 
 {
