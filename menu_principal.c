@@ -36,7 +36,7 @@ int main()
       break;
 
       //caso o usuario digitar uma opção invalida
-      default : printf("Opção invalida\n");
+      default : printf("Opcao invalida\n");
       break;
     }
   }

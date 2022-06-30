@@ -1,27 +1,27 @@
 #include "menu_header.h"
 #include <stdio.h>
 
-char CPF_CLIENTE[13];
 
-void Nova_Venda();
-void Listar_Cliente();
+
+void nova_venda();
+void listar_compras_cliente();
 
 void vendas()
 {
     int opcao_venda;
-    
-    
-    printf("1. Nova Venda\n2. Listar Venda do Cliente\n9. Voltar\n");
+
+
+    printf("1. Nova Venda\n2. Listar Compras do Cliente\n9. Voltar\n");
     scanf(" %d",&opcao_venda);
-    
+
     switch(opcao_venda)
     {
-        case 1: Nova_Venda();
+        case 1: nova_venda();
         break;
-        
-        case 2: Listar_Cliente();
+
+        case 2: listar_compras_cliente();
         break;
-        
+
         case 9: printf("Voltando\n");
         break;
 
@@ -30,15 +30,21 @@ void vendas()
     }
 }
 
-void Nova_Venda()
+//funcao para efetuar uma nova venda
+void nova_venda()
 {
+    char CPF_CLIENTE[13];
+
     printf("CPF DO CLIENTE: ");
     scanf(" %[^\n]s",CPF_CLIENTE);
-    
+
 
 }
 
-void Listar_Cliente()
+//funcao para listar as compras feitas por um cliente
+void listar_compras_cliente()
 {
-    printf("%s",CPF_CLIENTE);
+
+
+
 }
