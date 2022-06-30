@@ -22,7 +22,7 @@ void vendas()
         case 2: listar_compras_cliente();
         break;
 
-        case 9: printf("Voltando\n");
+        case 9: printf("\nVoltando\n");
         break;
 
         default: printf("opcao invalida\n");
