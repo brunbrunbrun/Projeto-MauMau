@@ -1,17 +1,13 @@
 #include "menu_header.h"
 #include <stdio.h>
 
-void cadastro_cliente();
-void cadastro_cliente_atualizar();
-void listar_cliente_idade();
-void listar_cliente_pontos();
-
 void clientes()
 {
     int opcao_cliente;
 
     printf("1. Cadastrar novo Cliente\n2. Atualizar cadastro de Cliente\n");
-    printf("3. Listar Quantidade de Clientes entre 18 e 25 anos\n4. Listar Clientes com mais de [1000] pontos\n9. Voltar\n");
+    printf("3. Listar Quantidade de Clientes entre 18 e 25 anos\n");
+    printf("4. Listar Clientes com mais de [1000] pontos\n9. Voltar\n");
     scanf( "%d",&opcao_cliente);
 
     switch(opcao_cliente)
@@ -39,37 +35,32 @@ void clientes()
 //funcao para cadastro de cliente
 void cadastro_cliente()
 {
-    char CPF[13];
-    char Nome[50];
-    int Dia,Mes,Ano,Idade;
-    char Endereco[50];
-    char Cidade[50];
-    char Estado[2];
-    int Pontos = 0;
+    TClientes Cliente;
 
-    //pega as informacoes do usuario, guardando nas variaveis locais, para depois serem escritas no arquivo
+    //pega as informacoes do usuario, guardando nas variaveis locais,
+    //para depois serem escritas no arquivo
     printf("Informe o CPF:\n");
-    scanf(" %[^\n]s",CPF);
+    scanf(" %[^\n]s",Cliente.CPF);
 
     //antes de escrever, olhar se o cpf ja não existe
 
     printf("Informe o Nome:\n");
-    scanf(" %[^\n]s",Nome);
+    scanf(" %[^\n]s",Cliente.Nome);
 
     printf("Informe o DD MM AAAA de nascimento:\n");
-    scanf(" %d %d %d",&Dia,&Mes,&Ano);
+    scanf(" %d %d %d",&Cliente.Nascimento.Dia,&Cliente.Nascimento.Mes,&Cliente.Nascimento.Ano);
 
     printf("Informe a Idade:\n");
-    scanf(" %d",&Idade);
+    scanf(" %d",&Cliente.Idade);
 
-    printf("Informe o Endereço:\n");
-    scanf(" %[^\n]s",Endereco);
+    printf("Informe o Endereco:\n");
+    scanf(" %[^\n]s",Cliente.Endereco);
 
     printf("Informe a Cidade:\n");
-    scanf(" %[^\n]s",Cidade);
+    scanf(" %[^\n]s",Cliente.Cidade);
 
     printf("Informe o Estado(sigla):\n");
-    scanf(" %[^\n]s",Estado);
+    scanf(" %[^\n]s",Cliente.Estado);
 
 }
 
@@ -82,22 +73,21 @@ void cadastro_cliente_atualizar()
   printf("Digite o CPF do cliente que deseja atualizar:\n");
   scanf(" %[^\n]s",CPF);
 
-
-
 }
 
 
 //funcao para listar cliente entre idade==18 e idade==25
 void listar_cliente_idade()
 {
-  int quantidade = 0;
+  int quant = 0;
 
-  //for loop passando por todos os clientes cadastrados, e sempre q Idade >=18 e <=25
+  //for loop passando por todos os clientes cadastrados,
+  // e sempre q Idade >=18 e <=25
   //vai quantidade++
 
 
   //mostra na tela quantos
-  printf("Temos um total de %d clientes cadastrados entre 18 e 25 anos.\n",quantidade);
+  printf("Temos um total de %d clientes cadastrados entre 18 e 25 anos.\n",quant);
 
 
 }
@@ -105,13 +95,13 @@ void listar_cliente_idade()
 //funcao para listar cliente com pontos > 1000
 void listar_cliente_pontos()
 {
-  int quantidade = 0;
+  int quant = 0;
 
   //for loop passando por todos os clientes cadastrados, e sempre q pontos > 1000
   //vai quantidade++
 
 
   //mostra na tela quantos
-  printf("Temos um total de %d clientes com mais de 1000 pontos.\n",quantidade);
+  printf("Temos um total de %d clientes com mais de 1000 pontos.\n",quant);
 
 }

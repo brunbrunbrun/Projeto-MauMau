@@ -1,12 +1,6 @@
 #include "menu_header.h"
 #include <stdio.h>
 
-void cadastro_produto();
-void cadastro_produto_atualizar();
-void listar_estoque_setor();
-void listar_estoque_baixo();
-
-
 void produtos()
 {
     int opcao_produtos;

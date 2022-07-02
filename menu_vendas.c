@@ -1,11 +1,6 @@
 #include "menu_header.h"
 #include <stdio.h>
 
-
-
-void nova_venda();
-void listar_compras_cliente();
-
 void vendas()
 {
     int opcao_venda;
@@ -44,7 +39,5 @@ void nova_venda()
 //funcao para listar as compras feitas por um cliente
 void listar_compras_cliente()
 {
-
-
 
 }
