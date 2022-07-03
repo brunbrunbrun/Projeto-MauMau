@@ -11,6 +11,7 @@ void cadastro_cliente();
 void cadastro_cliente_atualizar();
 void listar_cliente_idade();
 void listar_cliente_pontos();
+int tem_cpf(char *cpf);
 
 //funções em menu_produtos.c
 void cadastro_produto();

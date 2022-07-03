@@ -214,3 +214,42 @@ void listar_cliente_pontos()
     }
     fclose(f);
 }
+
+
+
+//-------------------------------------------------------------------
+//-------------funcao para ver se tem cpf ja cadastrado--------------
+//-------------------------------------------------------------------
+int tem_cpf(char *cpf)
+{
+    //Se achou o cpf, ele retorna o bloco correspondente a localização, sendo ele
+    //um int não negativo; caso contrario, retorna -1, indicando que não encontrou
+    FILE *f = fopen("./Arquivos/cliente.dat","rb");
+    TCliente cliente;
+    int index = 0;
+    bool achou = false;
+
+    while(fread(&cliente,sizeof(TCliente),1,f))
+    {
+        int cpf_match = (strcmp(cliente.CPF,cpf));
+        if(cpf_match == 0)
+        {
+            achou = true;
+        }
+        else
+        {
+            index++;
+        }
+    }
+    fclose(f);
+
+    if(achou == false)
+    {
+        return(-1);
+    }
+    else
+    {
+        return(index);
+    }
+
+}
