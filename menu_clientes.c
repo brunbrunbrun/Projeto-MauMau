@@ -180,7 +180,19 @@ void cadastro_cliente_atualizar()
 //------------------------------------------------------------------------------
 void listar_cliente_idade()
 {
+    FILE *f = fopen("./Arquivos/cliente.dat","rb");
+    TCliente cliente;
+    int quantos = 0;
 
+    while(fread(&cliente,sizeof(TCliente),1,f))
+    {
+        if((cliente.Idade >= 18)&&(cliente.Idade <=25))
+        {
+            quantos++;
+        }
+    }
+    printf("\t\tTemos %d clientes entre 18 e 25 anos\n",quantos);
+    fclose(f);
 }
 
 
@@ -190,5 +202,15 @@ void listar_cliente_idade()
 //--------------------------------------------------------------------------
 void listar_cliente_pontos()
 {
+    FILE *f = fopen("./Arquivos/cliente.dat","rb");
+    TCliente cliente;
 
+    while(fread(&cliente,sizeof(TCliente),1,f))
+    {
+        if(cliente.Pontos > 1000)
+        {
+            printf("\t\t%s\tCPF: %s\tPontos: %d\n",cliente.Nome,cliente.CPF,cliente.Pontos);
+        }
+    }
+    fclose(f);
 }
