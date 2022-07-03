@@ -216,7 +216,7 @@ void produtos_setor(char *setore)
         if(setorcerto == 0)
         {
             printf("\t\t---------\n");
-            printf("\t\tID: %d\tNome: %s\tPreco: %.2f\n",prod.ID_Produto,prod.Nome,prod.Preco);
+            printf("\t\tID: %d\tNome: %s\t\tPreco: %.2f\n",prod.ID_Produto,prod.Nome,prod.Preco);
             printf("\t\tValidade: %d/%d/%d\t\tEstoque: %d\n",prod.Validade.Dia,prod.Validade.Mes,prod.Validade.Ano,prod.Estoque);
             printf("\t\t---------\n");
 
@@ -232,5 +232,21 @@ void produtos_setor(char *setore)
 //------------------------------------------------------------------------------
 void listar_estoque_baixo()
 {
+    FILE *f = fopen("./Arquivos/Produtos.dat","rb");
+    TProduto prod;
 
+    printf("\t\tProdutos com estoque baixo:\n");
+
+    while(fread(&prod,sizeof(TProduto),1,f))
+    {
+        if(prod.Estoque < 5)
+        {
+            printf("\t\t---------\n");
+            printf("\t\tID: %d\tNome: %s\t\tPreco: %.2f\n",prod.ID_Produto,prod.Nome,prod.Preco);
+            printf("\t\tSetor: %s\n",prod.Setor);
+            printf("\t\tValidade: %d/%d/%d\t\tEstoque: %d\n",prod.Validade.Dia,prod.Validade.Mes,prod.Validade.Ano,prod.Estoque);
+            printf("\t\t---------\n");
+        }
+    }
+    fclose(f);
 }
