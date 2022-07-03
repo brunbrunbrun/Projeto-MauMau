@@ -16,6 +16,7 @@ void listar_cliente_pontos();
 void cadastro_produto();
 void cadastro_produto_atualizar();
 void listar_produtos_setor();
+void produtos_setor(char *setore);
 void listar_estoque_baixo();
 
 //funções em menu_vendas.c

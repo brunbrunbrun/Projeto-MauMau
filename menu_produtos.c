@@ -184,15 +184,35 @@ void listar_produtos_setor()
     char setor4[20] = "Padaria";
     char setor5[20] = "Acougue";
 
+    //chamando a funcao para cada setor
+    produtos_setor(setor1);
+    printf("\n");
+    produtos_setor(setor2);
+    printf("\n");
+    produtos_setor(setor3);
+    printf("\n");
+    produtos_setor(setor4);
+    printf("\n");
+    produtos_setor(setor5);
+    printf("\n");
+
+}
+
+
+//------------------------------------------------------------------------------
+//---------------funcao para receber o setor e mostrar os prod------------------
+//------------------------------------------------------------------------------
+void produtos_setor(char *setore)
+{
     FILE *f = fopen("./Arquivos/Produtos.dat","rb");
 
     TProduto prod;
 
-    printf("\t\t %s\n",setor1);
+    printf("\t\t %s\n",setore);
 
     while(fread(&prod,sizeof(TProduto),1,f))
     {
-        int setorcerto = strcmp(prod.Setor,setor1);
+        int setorcerto = strcmp(prod.Setor,setore);
         if(setorcerto == 0)
         {
             printf("\t\t---------\n");
@@ -202,10 +222,9 @@ void listar_produtos_setor()
 
         }
     }
-
-
-
+    fclose(f);
 }
+
 
 
 //------------------------------------------------------------------------------
