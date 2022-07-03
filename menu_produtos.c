@@ -177,6 +177,33 @@ void cadastro_produto_atualizar()
 //-------------------------------------------------------------------
 void listar_produtos_setor()
 {
+    //Setores
+    char setor1[20] = "Higiene e limpeza";
+    char setor2[20] = "Bebidas";
+    char setor3[20] = "Frios";
+    char setor4[20] = "Padaria";
+    char setor5[20] = "Acougue";
+
+    FILE *f = fopen("./Arquivos/Produtos.dat","rb");
+
+    TProduto prod;
+
+    printf("\t\t %s\n",setor1);
+
+    while(fread(&prod,sizeof(TProduto),1,f))
+    {
+        int setorcerto = strcmp(prod.Setor,setor1);
+        if(setorcerto == 0)
+        {
+            printf("\t\t---------\n");
+            printf("\t\tID: %d\tNome: %s\tPreco: %.2f\n",prod.ID_Produto,prod.Nome,prod.Preco);
+            printf("\t\tValidade: %d/%d/%d\t\tEstoque: %d\n",prod.Validade.Dia,prod.Validade.Mes,prod.Validade.Ano,prod.Estoque);
+            printf("\t\t---------\n");
+
+        }
+    }
+
+
 
 }
 
