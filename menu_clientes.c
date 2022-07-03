@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 
 //----------------------------------------------------------------------------------
@@ -47,7 +48,44 @@ void clientes()
 //-------------------------------------------------------------
 void cadastro_cliente()
 {
+    //adiciona na struct os dados do cliente, e depois anexa
+    //essa struct no arquivo binario
 
+    FILE *f = fopen("./Arquivos/cliente.dat","ab");
+    TCliente cliente;
+
+    printf("\t\t------------------------------------------------------\n");
+    printf("\t\tInforme os seguintes dados para cadastro de um cliente\n");
+
+    printf("\t\tno formato 123456789-01\n");
+    printf("\t\tCPF do cliente: ");
+    scanf(" %[^\n]s",cliente.CPF);
+
+    printf("\t\tNome do cliente: ");
+    scanf(" %[^\n]s",cliente.Nome);
+
+    printf("\t\tno formato dd mm aaaa\n");
+    printf("\t\tData de nascimento do cliente: ");
+    scanf(" %d %d %d",&cliente.Nascimento.Dia,&cliente.Nascimento.Mes,&cliente.Nascimento.Ano);
+
+    printf("\t\tIdade do cliente: ");
+    scanf(" %d",&cliente.Idade);
+
+    printf("\t\tEndereco do cliente: ");
+    scanf(" %[^\n]s",cliente.Endereco);
+
+    printf("\t\tCidade do cliente: ");
+    scanf(" %[^\n]s",cliente.Cidade);
+
+    printf("\t\tSigla do estado do cliente: ");
+    scanf(" %[^\n]s",cliente.Estado);
+
+    cliente.Pontos = 0;
+
+    printf("\t\t------------------------------------------------------\n");
+
+    fwrite(&cliente,sizeof(TCliente),1,f);
+    fclose(f);
 }
 
 
@@ -57,7 +95,82 @@ void cadastro_cliente()
 //-----------------------------------------------------------------------------
 void cadastro_cliente_atualizar()
 {
+    int index = 0;
+    char CPF[13];
+    bool achou = false;
+    FILE *f = fopen("./Arquivos/cliente.dat","rb+");
 
+    TCliente cliente;
+
+    printf("\t\t-----------------------------------------------------------\n");
+    printf("\t\tno formato 123456789-01\n");
+    printf("\t\tDigite o CPF do cliente que deseja atualizar: ");
+    scanf(" %[^\n]s",CPF);
+
+    //procura por todos os clientes cadastrados até achar um que tenha o mesmo
+    //CPF que o escolhido, ao achar, para o loop e guarda em index onde no bloco
+    //estaria esse cliente
+    while(achou == false)
+    {
+        fread(&cliente,sizeof(TCliente),1,f);
+
+        int clientecerto = strcmp(cliente.CPF,CPF);
+        if(clientecerto == 0)
+        {
+            achou = true;
+        }
+
+        else
+        {
+            index++;
+        }
+    }
+
+    //vai até o index escolhido, e mostra para o usuario o cliente escolhido
+    //para atualizar
+    fseek(f,index * sizeof(TCliente),SEEK_SET);
+    fread(&cliente,sizeof(TCliente),1,f);
+
+    printf("\t\tCliente Selecionado:\n");
+    printf("\t\tCPF: %s\tNome: %s\n",cliente.CPF,cliente.Nome);
+    printf("\t\tNascimento: %d/%d/%d\tIdade: %d\n",cliente.Nascimento.Dia,cliente.Nascimento.Mes,cliente.Nascimento.Ano,cliente.Idade);
+    printf("\t\tEndereco: %s\n\t\tCidade: %s\tEstado: %s\n",cliente.Endereco,cliente.Cidade,cliente.Estado);
+    printf("\t\tPontos: %d\n",cliente.Pontos);
+    printf("\t\t---------------\n");
+    printf("\t\tInsira os novos dados:\n");
+
+    //novos dados para serem atualizados
+    printf("\t\tno formato 123456789-01\n");
+    printf("\t\tCPF do cliente: ");
+    scanf(" %[^\n]s",cliente.CPF);
+
+    printf("\t\tNome do cliente: ");
+    scanf(" %[^\n]s",cliente.Nome);
+
+    printf("\t\tno formato dd mm aaaa\n");
+    printf("\t\tData de nascimento do cliente: ");
+    scanf(" %d %d %d",&cliente.Nascimento.Dia,&cliente.Nascimento.Mes,&cliente.Nascimento.Ano);
+
+    printf("\t\tIdade do cliente: ");
+    scanf(" %d",&cliente.Idade);
+
+    printf("\t\tEndereco do cliente: ");
+    scanf(" %[^\n]s",cliente.Endereco);
+
+    printf("\t\tCidade do cliente: ");
+    scanf(" %[^\n]s",cliente.Cidade);
+
+    printf("\t\tSigla do estado do cliente: ");
+    scanf(" %[^\n]s",cliente.Estado);
+
+    printf("\t\tPontos do cliente: ");
+    scanf(" %d",&cliente.Pontos);
+
+    //posiciona no bloco do cliente escolhido
+    fseek(f,index * sizeof(TCliente),SEEK_SET);
+    fwrite(&cliente,sizeof(TCliente),1,f);
+
+    fclose(f);
 }
 
 

@@ -28,11 +28,6 @@ void vendas()
 //funcao para efetuar uma nova venda
 void nova_venda()
 {
-    char CPF_CLIENTE[13];
-
-    printf("CPF DO CLIENTE: ");
-    scanf(" %[^\n]s",CPF_CLIENTE);
-
 
 }
 
