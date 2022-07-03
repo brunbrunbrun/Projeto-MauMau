@@ -39,7 +39,7 @@ typedef struct TProduto
     float Preco;
     TData Validade;
     int Estoque;
-} Tproduto;
+} TProduto;
 
 
 typedef struct TClientes

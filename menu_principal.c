@@ -11,9 +11,9 @@ int main()
   while(SAIR==false)
   {
     int opcao = 0;
-    printf("----------\n");
+    printf("----------------\n");
     printf("1. Vendas\n2. Clientes\n3. Produtos\n9. Sair\n");
-    printf("----------\n");
+    printf("----------------\n");
     scanf(" %d", &opcao);
 
     switch(opcao)
