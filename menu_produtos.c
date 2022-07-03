@@ -51,7 +51,7 @@ void cadastro_produto()
     //adiciona na struct os dados do produto, e depois anexa
     //essa struct no arquivo binario
 
-    FILE *f = fopen("./Arquivos/Produtos.dat","ab");
+    FILE *f = fopen("./Arquivos/produtos.dat","ab");
     TProduto prod;
 
     char setor1[20] = "Higiene e limpeza";
@@ -60,7 +60,7 @@ void cadastro_produto()
     char setor4[20] = "Padaria";
     char setor5[20] = "Acougue";
 
-    printf("\t\t-----------------------------------------------------------\n");
+    printf("\t\t------------------------------------------------------\n");
     printf("\t\tInforme os seguintes dados para cadastro de um produto\n");
 
     printf("\t\tID do produto: ");
@@ -85,7 +85,7 @@ void cadastro_produto()
     printf("\t\tQuantia em estoque do produto: ");
     scanf(" %d",&prod.Estoque);
 
-    printf("\t\t-----------------------------------------------------------\n");
+    printf("\t\t------------------------------------------------------\n");
 
     fwrite(&prod,sizeof(TProduto),1,f);
     fclose(f);
@@ -101,7 +101,7 @@ void cadastro_produto_atualizar()
     int index = 0;
     int id;
     bool achou = false;
-    FILE *f = fopen("./Arquivos/Produtos.dat","rb+");
+    FILE *f = fopen("./Arquivos/produtos.dat","rb+");
 
     TProduto prod;
 
@@ -129,6 +129,7 @@ void cadastro_produto_atualizar()
     //vai até o index escolhido, e mostra para o usuario o produto escolhido
     fseek(f,index * sizeof(TProduto),SEEK_SET);
     fread(&prod,sizeof(TProduto),1,f);
+    
     printf("\t\tProduto selecionado:\n");
     printf("\t\tID: %d\n\t\tSetor: %s\n\t\tNome: %s\n",prod.ID_Produto,prod.Setor,prod.Nome);
     printf("\t\tPreco: %.2f\n\t\tValidade: %d/%d/%d\n\t\tEstoque: %d\n",prod.Preco,prod.Validade.Dia,prod.Validade.Mes,prod.Validade.Ano,prod.Estoque);
@@ -204,7 +205,7 @@ void listar_produtos_setor()
 //------------------------------------------------------------------------------
 void produtos_setor(char *setore)
 {
-    FILE *f = fopen("./Arquivos/Produtos.dat","rb");
+    FILE *f = fopen("./Arquivos/produtos.dat","rb");
 
     TProduto prod;
 
@@ -232,7 +233,7 @@ void produtos_setor(char *setore)
 //------------------------------------------------------------------------------
 void listar_estoque_baixo()
 {
-    FILE *f = fopen("./Arquivos/Produtos.dat","rb");
+    FILE *f = fopen("./Arquivos/produtos.dat","rb");
     TProduto prod;
 
     printf("\t\tProdutos com estoque baixo:\n");

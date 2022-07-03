@@ -43,7 +43,7 @@ typedef struct TProduto
 } TProduto;
 
 
-typedef struct TClientes
+typedef struct TCliente
 {
     char CPF[13];
     char Nome[50];
@@ -53,17 +53,17 @@ typedef struct TClientes
     char Cidade[50];
     char Estado[2];
     int Pontos;
-} TClientes;
+} TCliente;
 
 
-typedef struct TVendas
+typedef struct TVenda
 {
     int ID_Venda;
     char CPF[13];
     TData Data_Compra;
     float Valor_Total;
     int Quantidade_Produtos;
-} TVendas;
+} TVenda;
 
 
 typedef struct TItensCompra
