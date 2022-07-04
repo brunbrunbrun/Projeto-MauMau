@@ -1,4 +1,3 @@
-
 Sistema_Mercado: menu_principal.o menu_clientes.o menu_produtos.o menu_vendas.o
 	gcc menu_principal.o menu_clientes.o menu_produtos.o menu_vendas.o -o Sistema_Mercado
 

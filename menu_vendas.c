@@ -60,13 +60,30 @@ void nova_venda()
         //apos cadastro, procura novamente o index de onde esta o cpf no arquivo
         index = (tem_cpf(CPF));
     }
+     //prossegue com a venda, sabendo que o cliente esta cadastrado, e onde.
+    else
+    {
+        FILE *f = fopen("./Arquivos/produtos.dat","ab");
+        TProduto prod;
 
-    //prossegue com a venda, sabendo que o cliente esta cadastrado, e onde.
+        int quant;
 
-        //ESCREVER O CODIGO DE COMO FAZER A VENDA AQUI!
-        //ESCREVER O CODIGO DE COMO FAZER A VENDA AQUI!
-        //ESCREVER O CODIGO DE COMO FAZER A VENDA AQUI!
-        //ESCREVER O CODIGO DE COMO FAZER A VENDA AQUI!
+        printf("Informe o ID do produto que deseja comprar: ");
+        scanf(" %d", &prod.ID_Produto);
+
+        if(){
+            printf("Informe a quantidade do produto: ");
+            scanf(" %d", &quant);
+        }
+        else
+        {
+            printf("ID inválido, tente novamente");
+        }
+
+      fwrite(&prod,sizeof(TProduto),1,f);
+      fclose(f);
+
+    }
 
 }
 
@@ -92,6 +109,7 @@ void listar_compras_cliente()
     {
         case 1: printf("\t\t\tInsira o CPF: ");
                 scanf(" %[^\n]s",CPF);
+                if (CPF)
         break;
 
         case 2: printf("\t\t\tInsira o Nome Completo: ");
