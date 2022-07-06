@@ -227,8 +227,19 @@ void nova_venda()
 
      //cadastrar pontos para o cliente
      int pontos_ganhos = (int)venda.Valor_Total;
-     printf("\t\tGanhou %d pontos\n",pontos_ganhos);
 
+     FILE *f_cliente = fopen("./Arquivos/cliente.dat","rb+");
+     TCliente cliente;
+
+     fseek(f_cliente,index_cliente * sizeof(TCliente),SEEK_SET);
+     fread(&cliente,sizeof(TCliente),1,f_cliente);
+
+     cliente.Pontos += pontos_ganhos;
+
+     fseek(f_cliente,index_cliente * sizeof(TCliente),SEEK_SET);
+     fwrite(&cliente,sizeof(TCliente),1,f_cliente);
+
+     fclose(f_cliente);
 
 }
 
@@ -249,7 +260,7 @@ void listar_compras_cliente()
     printf("\t\t\t1. CPF\n\t\t\t2. Nome Completo\n\t\t\t9. Voltar\n\t\t\t");
     scanf(" %d",&opcao_busca);
 
-    //switch case para a opção escolhida, ambos retorna ao programa o cpf do cliente
+    //switch case para a opção escolhida
     switch(opcao_busca)
     {
         case 1: printf("\t\t\tInsira o CPF: ");
@@ -258,9 +269,6 @@ void listar_compras_cliente()
 
         case 2: printf("\t\t\tInsira o Nome Completo: ");
                 scanf(" %[^\n]s",Nome_Completo);
-
-                //fazer com que ele procure o cpf do cliente
-                //fazer uma funcao só pra isso?
 
         break;
 
@@ -271,8 +279,51 @@ void listar_compras_cliente()
         break;
     }
 
+    //se for dito o nome completo, então iremos procurar pelo cpf do cliente
+    if(opcao_busca == 2)
+    {
 
+            FILE *f = fopen("./Arquivos/cliente.dat","rb");
+            TCliente cliente;
+            int index = 0;
+            bool achou = false;
 
+            while(achou == false)
+            {
+                fread(&cliente,sizeof(TCliente),1,f);
+
+                int nome_match = strcmp(cliente.Nome,Nome_Completo);
+                if(nome_match == 0)
+                {
+                    achou = true;
+                }
+
+                else
+                {
+                    index++;
+                }
+            }
+            fseek(f,index * sizeof(TCliente),SEEK_SET);
+            fread(&cliente,sizeof(TCliente),1,f);
+            fclose(f);
+            strcpy(CPF,cliente.CPF);
+    }
+
+    //listar as compras
+    FILE *f_vendas = fopen("./Arquivos/vendas.dat","rb");
+    TVenda venda;
+
+    while(fread(&venda,sizeof(TVenda),1,f_vendas))
+    {
+        int cpf_match = strcmp(venda.CPF,CPF);
+        if(cpf_match == 0)
+        {
+            printf("\t\tData: %d/%d/%d\n",venda.Data_Compra.Dia,venda.Data_Compra.Mes,venda.Data_Compra.Ano);
+            printf("\t\tValor da Compra: R$%.2f\tQuantidade de produtos: %d\n",venda.Valor_Total,venda.Quantidade_Produtos);
+            printf("\t\t---------\n");
+        }
+    }
+    fclose(f_vendas);
 
 
 }
