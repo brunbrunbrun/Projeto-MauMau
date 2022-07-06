@@ -76,6 +76,7 @@ void nova_venda()
         //apos cadastro, procura novamente o index de onde esta o cpf no arquivo
         index_cliente = (tem_cpf(CPF));
     }
+
     //anexa o cpf do cliente, na venda
     strcpy(venda.CPF,CPF);
 
@@ -203,6 +204,7 @@ void nova_venda()
          printf("\t\t1. Sim\n\t\t2. Nao (voltar)\n\t\t");
          scanf(" %d",&sim_nao);
 
+         //se digitar 2 ele sai do laço de repeticao de produtos para a compra
          if(sim_nao == 2)
          {
              ainda = false;
@@ -210,6 +212,23 @@ void nova_venda()
 
          fclose(f_prod);
      }
+     //insere quantos produtos foram adicionados e o valor total
+     venda.Quantidade_Produtos = Quantidade_Produtos;
+     venda.Valor_Total = Valor_Total;
+     fwrite(&venda,sizeof(TVenda),1,f_venda);
+     fclose(f_venda);
+
+     //mostra a venda atual ja concluida
+     printf("\t\tVenda finalizada\n");
+     printf("\t\tID_Venda: %d\tCPF: %s\t%d/%d/%d\n",venda.ID_Venda,venda.CPF,venda.Data_Compra.Dia,venda.Data_Compra.Mes,venda.Data_Compra.Ano);
+     printf("\t\tValor total: R$%.2f\t\t Quantidade de produtos: %d\n",venda.Valor_Total,venda.Quantidade_Produtos);
+
+
+
+     //cadastrar pontos para o cliente
+     int pontos_ganhos = (int)venda.Valor_Total;
+     printf("\t\tGanhou %d pontos\n",pontos_ganhos);
+
 
 }
 
