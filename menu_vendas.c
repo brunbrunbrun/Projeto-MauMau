@@ -40,9 +40,27 @@ void vendas()
 void nova_venda()
 {
     char CPF[13];
+    TVenda venda;
+    FILE *f_venda = fopen("./Arquivos/vendas.dat","ab+");
+    int ID_Venda = 1;
+    int Quantidade_Produtos = 0;
+    float Valor_Total = 0;
+
+
+    //fazendo o id da venda
+    while(fread(&venda,sizeof(TVenda),1,f_venda))
+    {
+        ID_Venda++;
+    }
+    venda.ID_Venda = ID_Venda;
+
+    //pegando a data da compra pelo usuario
+    printf("\t\tInforme a data desta compra no formato dd-mm-aaaa\n\t\t");
+    scanf(" %d %d %d",&venda.Data_Compra.Dia,&venda.Data_Compra.Mes,&venda.Data_Compra.Ano);
 
 
 
+    //Obtendo o CPF do cliente e cadastrando se n tiver
     printf("\t\t-------------------------\n");
     printf("\t\tno formato 123456789-01\n");
     printf("\t\tInforme o CPF do cliente: ");
@@ -58,6 +76,8 @@ void nova_venda()
         //apos cadastro, procura novamente o index de onde esta o cpf no arquivo
         index_cliente = (tem_cpf(CPF));
     }
+    //anexa o cpf do cliente, na venda
+    strcpy(venda.CPF,CPF);
 
      //prossegue com a venda, sabendo que o cliente esta cadastrado, e onde.
 
@@ -72,6 +92,8 @@ void nova_venda()
          bool achou = false;
          int index_produto = 0;
          bool existe;
+         int quantia_atual;
+         float Preco_total_produto;
 
          printf("\t\tDigite o ID do produto: ");
          scanf(" %d", &ID_do_produto);
@@ -125,12 +147,57 @@ void nova_venda()
              else
              {
                  //Estoque > 0 então continuamos com a venda
+                 printf("\t\tDigite a quantia que deseja comprar\n\t\t");
+                 scanf(" %d",&quantia_atual);
 
+                 //se a quantia for maior que o estoque do produto, a compra é
+                 //cancelada e vai para o fim onde pergunta se quer continuar
+                 if(quantia_atual > prod.Estoque)
+                 {
+                     printf("\t\tQuantia inserida eh maior que a disponivel no estoque\n");
+                     printf("\t\tCompra atual cancelada.\n");
+                 }
+                 else
+                 {
+                     //tirar a quantia de produto do estoque
+                     int novo_estoque = prod.Estoque - quantia_atual;
+                     fseek(f_prod,index_produto * sizeof(TProduto),SEEK_SET);
+                     prod.Estoque = novo_estoque;
+                     fwrite(&prod,sizeof(TProduto),1,f_prod);
+
+                     //aumentar quantidade de produtos no Venda
+                     Quantidade_Produtos++;
+
+                     //criação e adesao do item compra//
+                     FILE *f_itenscompra = fopen("./Arquivos/itenscompra.dat","ab");
+                     TItensCompra itenscompra;
+
+                     //id da venda atual vai pra itencompra
+                     itenscompra.ID_Venda = ID_Venda;
+
+                     //copia o cpf do cliente pro campo de cpf do itencompra
+                     strcpy(itenscompra.CPF,CPF);
+
+                     //informações do produto atual copiado pro itenscompra
+                     itenscompra.ID_Produto = prod.ID_Produto;
+                     itenscompra.Quantidade = quantia_atual;
+                     itenscompra.Preco_Unitario_Produto = prod.Preco;
+                     Preco_total_produto = quantia_atual * prod.Preco;
+                     itenscompra.Preco_Total_Produto = Preco_total_produto;
+
+                     //gravar no arquivo o itenscompra
+                     fwrite(&itenscompra,sizeof(TItensCompra),1,f_itenscompra);
+                     fclose(f_itenscompra);
+
+                     //adicionar o valor total do produto no valor total da venda
+                     Valor_Total += Preco_total_produto;
+
+                 }
 
              }
          }
 
-            //sair ou continuar no loop de listagem de produtos
+        //sair ou continuar no loop de listagem de produtos
          int sim_nao;
          printf("\t\tDeseja continuar a venda?\n");
          printf("\t\t1. Sim\n\t\t2. Nao (voltar)\n\t\t");
@@ -141,6 +208,7 @@ void nova_venda()
              ainda = false;
          }
 
+         fclose(f_prod);
      }
 
 }
