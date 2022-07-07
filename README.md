@@ -6,9 +6,9 @@ Tema do mercadin pra P2 de LP
 - ~menu_produtos~
 - ~menu_vendas~
 - ~menu_principal~
-- Video apresentação
+- Video apresentação (quase pronto)
 - PDF documentando
 
-## REVISAR
-- Todas as funções
-- Melhorar alguns textos/menus
+## ~REVISAR~
+- ~Todas as funções~
+- ~Melhorar alguns textos/menus~
