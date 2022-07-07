@@ -9,6 +9,6 @@ Tema do mercadin pra P2 de LP
 - Video apresentação (quase pronto)
 - PDF documentando
 
-## REVISAR
-- Todas as funções
-- Melhorar alguns textos/menus
+## ~REVISAR~
+- ~Todas as funções~
+- ~Melhorar alguns textos/menus~
